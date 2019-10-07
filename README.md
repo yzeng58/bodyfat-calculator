@@ -16,5 +16,14 @@ This repository contains 4 folders:
 
 This folder contains the code we used to conduct data cleaning, model fitting, model selection and model diagnosis.
 
-##
+## Data
 
+This folder contains the raw data we use to conduct analysis and a table for variable selection
+
+## Image
+
+This folder contains the images of our project.
+
+## Presentation
+
+This folder contains a slides for our presentation of the project.
