@@ -1,3 +1,13 @@
 STAT 628 - Module 2
 This Github repository is made by Yuchen Zeng, Ruixuan Zhao, Hao Pan and Jantong Wang. This is a course project which aims to obtain a 
-simple and accurate way to determine body fat percentage. 
+simple and accurate way to determine body fat percentage. We build three models to predict body fat percentage, and select two models 
+which perform better to make a shiny APP finally.
+
+This repository contains:
+1.
+2.
+3.
+
+
+
+
