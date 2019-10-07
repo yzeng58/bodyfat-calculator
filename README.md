@@ -27,3 +27,6 @@ This folder contains the images of our project.
 ## Presentation
 
 This folder contains a slides for our presentation of the project.
+
+
+#### Shiny Link: https://reaperconan.shinyapps.io/BodyfatCalculator/
