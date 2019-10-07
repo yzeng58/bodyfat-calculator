@@ -14,5 +14,7 @@ This repository contains 4 folders:
 
 ## Code
 
+This folder contains the code we used to conduct data cleaning, model fitting, model selection and model diagnosis.
 
+##
 
