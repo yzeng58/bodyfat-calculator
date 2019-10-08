@@ -12,9 +12,9 @@ function(input,output) {
     if (input$unit_height == "cm") height = input$height/2.54 else height = input$height
     
     if (input$worh == "Weight") {
-      p = -40.32105+0.90438*abodmen*2-0.13626*weight
+      p = -40.32105+0.90438*abodmen-0.13626*weight
     } else {
-      p = -2.287e+01-3.903e+05/(abodmen*2 *height)-1.328e+00*abodmen*2/height+7.335e+03/height
+      p = -2.287e+01-3.903e+05/(abodmen *height)-1.328e+00*abodmen/height+7.335e+03/height
     }
     
     bodyfat.judge = function(gender,bodyfat){
@@ -25,7 +25,7 @@ function(input,output) {
         if (21 < bodyfat & bodyfat <= 25) return("Fitness")
         if (25 < bodyfat & bodyfat <= 32) return("Average")
         if (bodyfat > 31 & bodyfat <= 60) return("Obese")
-        if (bodyfat > 60) return(NA)
+        if (bodyfat > 60) return(NULL)
       }
       else {
         if (bodyfat <= 3) return(NA) #"Extremely below normal range! Please check your input."
@@ -34,11 +34,11 @@ function(input,output) {
         if (14 < bodyfat & bodyfat <= 18) return("Fitness")
         if (18 < bodyfat & bodyfat <= 25) return("Average")
         if (bodyfat > 25 & bodyfat <= 60) return("Obese")
-        if (bodyfat > 60) return(NA)
+        if (bodyfat > 60) return(NULL)
       }
     }
     
-    if (!is.na(bodyfat.judge("male", p)))  {
+    if (!is.null(bodyfat.judge("male", p)) && !is.na(bodyfat.judge("male", p)) )  {
       ggplot(data=data.frame(ingredient=c("fat","other"), value=c(p,100-p)), aes(x="", y=value, fill=ingredient))+
         geom_bar(width = 1, stat = "identity")+coord_polar("y", start=0)+
         geom_text(aes(y = 90, label = percent(p/100)), size=5)+theme_gray()+
@@ -55,15 +55,15 @@ function(input,output) {
     if (input$unit_height == "cm") height = input$height/2.54 else height = input$height
     
     if (input$worh == "Weight") {
-      p = -40.32105+0.90438*abodmen*2-0.13626*weight
+      p = -40.32105+0.90438*abodmen-0.13626*weight
     } else {
-      p = -2.287e+01-3.903e+05/(abodmen*2*height)-1.328e+00*abodmen*2/height+7.335e+03/height
+      p = -2.287e+01-3.903e+05/(abodmen*height)-1.328e+00*abodmen/height+7.335e+03/height
     }
     
     bodyfat.judge = function(gender,bodyfat){
       if (gender == "male"){
-        if (bodyfat <= 10) return(NA) #"Extremely below normal range! Please check your input."
-        if (10 < bodyfat & bodyfat <= 14) return("Essential fat")
+        if (bodyfat <= 5) return(NA) #"Extremely below normal range! Please check your input."
+        if (5 < bodyfat & bodyfat <= 14) return("Essential fat")
         if (14 < bodyfat & bodyfat <= 21) return("Athletes")
         if (21 < bodyfat & bodyfat <= 25) return("Fitness")
         if (25 < bodyfat & bodyfat <= 32) return("Average")
@@ -82,11 +82,11 @@ function(input,output) {
     }
     
     str1 <- paste0("You body fat percentage is: ", round(p,1), "%.")
-    if (is.na(bodyfat.judge("male", p))) {
-      HTML( paste("Your body fat is",round(p,1),"%.", h3("Extremely below the normal range! Please check your input.")) )
+    if (is.null(bodyfat.judge("male", p))) {
+      HTML( paste("Your body fat is",round(p,1),"%.", h3("Extremely above the normal range! Please check your input.")) )
     } else {
-      if (is.null(bodyfat.judge("male", p))){
-        HTML( paste("Your body fat is",round(p,1),"%.",h3("Extremely above the normal range! Please check your input.")) )
+      if (is.na(bodyfat.judge("male", p))){
+        HTML( paste("Your body fat is",round(p,1),"%.",h3("Extremely below the normal range! Please check your input.")) )
       } else HTML(paste(str1, h4("You are:   "), h1(bodyfat.judge("male", p), align = "center"), sep = '<br/>'))
       
     } 
